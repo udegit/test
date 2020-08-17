@@ -1,0 +1,168 @@
+---
+swagger: "2.0"
+info:
+  description: "Signal of Interest (SOI) data is sent from TEDS or some Device in form of REST API POST with unique id per its source device along with timestamp"
+  version: "1.0.0"
+  title: "dv_soi_with_extended_data"
+host: "10.194.22.90:9090"
+basePath: "/server/ude/dv_soi_with_extended_data"
+tags:
+- name: "dv_soi_with_extended_data"
+  description: "Operations available for view dv_soi_with_extended_data"
+schemes:
+- "http"
+paths:
+  /views/dv_soi_with_extended_data:
+    get:
+      tags:
+      - "dv_soi_with_extended_data"
+      description: "Returns values of view dv_soi_with_extended_data"
+      operationId: "queryView_dv_soi_with_extended_data"
+      produces:
+      - "application/json; charset=UTF-8; subtype=denodo-7.0"
+      - "text/html; charset=UTF-8; subtype=denodo-7.0"
+      parameters:
+      - $ref: "#/parameters/format_parameter"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/dv_soi_with_extended_data_response_def"
+        204:
+          description: "No results were returned"
+        400:
+          description: "Bad request"
+        401:
+          description: "Authentication failed"
+        403:
+          description: "Insufficient permissions to perform this request"
+        500:
+          description: "Runtime error"
+ 
+definitions:
+  links_def:
+    required:
+    - "href"
+    - "rel"
+    properties:
+      rel:
+        type: "string"
+        xml:
+          attribute: true
+      href:
+        type: "string"
+        xml:
+          attribute: true
+      title:
+        type: "string"
+        xml:
+          attribute: true
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        description: "MIME type of a blob"
+    xml:
+      name: "link"
+      namespace: "http://www.w3.org/2005/Atom"
+  
+  dv_soi_with_extended_data_element_def:
+    properties:
+      name:
+        type: "string"
+        description: "Virtual DataPort type: text"
+      soi_id:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      lowfreq_0:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      highfreq_0:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      modulation:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      frequnit_0:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      emissionpatterns_0:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      bandwidth:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      bandwidthunit_0:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      radius:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      radiusunit_0:
+        type: "integer"
+        format: "int32"
+        description: "Virtual DataPort type: int"
+      longitude:
+        type: "number"
+        format: "float"
+        description: "Virtual DataPort type: float"
+      latitude:
+        type: "number"
+        format: "float"
+        description: "Virtual DataPort type: float"
+      links:
+        type: "array"
+        items:
+          $ref: "#/definitions/links_def"
+    description: "Extended schema of view dv_soi_with_extended_data"
+
+
+  dv_soi_with_extended_data_response_def:
+    properties:
+      name:
+        type: "string"
+        xml:
+          attribute: true
+        description: "Virtual DataPort view name"
+      description:
+        type: "string"
+        xml:
+          attribute: true
+        description: "Virtual DataPort view description"
+      elements:
+        type: "array"
+        description: "Results returned by the query"
+        items:
+          $ref: "#/definitions/dv_soi_with_extended_data_element_def"
+      links:
+        type: "array"
+        description: "Links available for the current element (e.g. pagination links)"
+        items:
+          $ref: "#/definitions/links_def"
+    xml:
+      name: "view"
+      namespace: "http://www.denodo.com/restful"
+
+
+parameters:
+ 
+  format_parameter:
+    name: "$format"
+    in: "query"
+    description: "Defines the output format of the query"
+    required: false
+    type: "string"
+  
+    enum:
+    - "JSON"
+
+ 
